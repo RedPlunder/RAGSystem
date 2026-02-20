@@ -1,0 +1,55 @@
+# Configuration for RAG Agents
+
+# Embedding Agent Configuration
+embedding_config:
+  embedding_model: "text-embedding-3-small"
+  embedding_dim: 1536
+  batch_size: 20
+  embedding_path: "./dataset/doc_embeddings.npy"
+
+# Retrieval Agent Configuration
+retrieval_config:
+  reranker_model: "BAAI/bge-reranker-v2-m3"
+  rerank_method: "model"  # Options: "model" or "tags"
+  max_length: 4096
+
+# Generation Agent Configuration
+generation_config:
+  model: "gpt-4"  # or "gpt-3.5-turbo", "gpt-4o", etc.
+  temperature: 0
+  max_retries: 3
+  default_model: "gpt-4"
+
+# RAG Coordinator Configuration
+coordinator_config:
+  # Embedding settings
+  embedding_config:
+    embedding_model: "text-embedding-3-small"
+    embedding_dim: 1536
+    batch_size: 20
+    embedding_path: "./dataset/doc_embeddings.npy"
+
+  # Retrieval settings
+  retrieval_config:
+    reranker_model: "BAAI/bge-reranker-v2-m3"
+    rerank_method: "model"
+    max_length: 4096
+
+  # Generation settings
+  generation_config:
+    model: "gpt-4"
+    temperature: 0
+    max_retries: 3
+
+# Data paths
+data:
+  documents_csv: "./dataset/all_docs_full.csv"
+  input_csv: "./result_structural/latest_input_data_filtered_rewrite_containyaml.csv"
+  output_csv: "./result_structural/rag_output.csv"
+
+# Processing settings
+processing:
+  batch_size: 40
+  limit: null  # Set to a number to limit processing, or null for all
+  retrieval_k: 10  # Number of documents to retrieve initially
+  rerank_k: 4      # Number of documents after reranking
